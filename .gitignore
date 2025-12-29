@@ -21,7 +21,7 @@ ENV/
 Thumbs.db
 
 # 테스트 중 생성되는 임시 파일
-*.csv
-*.json
-*.txt
 output/
+
+# requirements.txt는 제외
+!requirements.txt
