@@ -1,0 +1,36 @@
+# ============================================================
+# Day 02 실습용 docker-compose.yml
+# 테스트 환경을 컨테이너로 구성
+# ============================================================
+
+services:
+  # 테스트 실행 서비스
+  # 사용법: docker-compose run --rm test
+  test:
+    image: day02-exercise:latest
+    build: .                    # 현재 디렉토리의 Dockerfile 사용
+    volumes:
+      - .:/app                  # 소스 코드 마운트 (코드 수정 즉시 반영)
+    command: pytest -v --tb=short
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1  # .pyc 파일 생성 방지
+
+  # 특정 테스트만 실행
+  # 사용법: docker-compose run --rm test-single pytest test_exercise.py::TestReadTextFile -v
+  test-single:
+    image: day02-exercise:latest
+    build: .
+    volumes:
+      - .:/app
+    entrypoint: ["pytest"]
+
+  # Python 대화형 셸 (디버깅용)
+  # 사용법: docker-compose run --rm shell
+  shell:
+    image: day02-exercise:latest
+    build: .
+    volumes:
+      - .:/app
+    command: python
+    stdin_open: true
+    tty: true
