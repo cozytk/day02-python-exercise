@@ -31,8 +31,8 @@ def read_text_file(file_path: str) -> str:
 
     힌트: with open(..., 'r', encoding='utf-8') as f: 를 사용하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return f.read()
 
 
 def write_text_file(file_path: str, content: str) -> int:
@@ -52,8 +52,8 @@ def write_text_file(file_path: str, content: str) -> int:
 
     힌트: f.write()는 쓴 문자 수를 반환합니다
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    with open(file_path, 'w', encoding='utf-8') as f:
+        return f.write(content)
 
 
 def read_csv_as_dicts(file_path: str) -> List[Dict[str, str]]:
@@ -75,8 +75,9 @@ def read_csv_as_dicts(file_path: str) -> List[Dict[str, str]]:
 
     힌트: csv.DictReader를 사용하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    with open(file_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        return list(reader)
 
 
 def write_dicts_to_csv(file_path: str, data: List[Dict], fieldnames: List[str]) -> int:
@@ -98,8 +99,11 @@ def write_dicts_to_csv(file_path: str, data: List[Dict], fieldnames: List[str]) 
 
     힌트: csv.DictWriter를 사용하세요. writeheader()와 writerows()를 활용하세요.
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    with open(file_path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+    return len(data)
 
 
 def read_json_file(file_path: str) -> Any:
@@ -118,8 +122,8 @@ def read_json_file(file_path: str) -> Any:
 
     힌트: json.load()를 사용하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 
 def write_json_file(file_path: str, data: Any, indent: int = 2) -> None:
@@ -133,8 +137,8 @@ def write_json_file(file_path: str, data: Any, indent: int = 2) -> None:
 
     힌트: json.dump()를 사용하세요. ensure_ascii=False 옵션으로 한글을 그대로 저장하세요.
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=indent)
 
 
 # =============================================================================
