@@ -207,8 +207,7 @@ def filter_by_condition(data: List[Dict], key: str, value: Any) -> List[Dict]:
 
     힌트: 리스트 컴프리헨션을 사용하면 간단합니다
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    return [item for item in data if item.get(key) == value]
 
 
 def group_and_count(data: List[Dict], key: str) -> Dict[str, int]:
@@ -230,8 +229,12 @@ def group_and_count(data: List[Dict], key: str) -> Dict[str, int]:
     힌트: 빈 딕셔너리를 만들고 for 루프로 카운트하거나,
           collections.Counter를 사용할 수 있습니다
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    result = {}
+    for item in data:
+        group_value = item.get(key)
+        if group_value is not None:
+            result[group_value] = result.get(group_value, 0) + 1
+    return result
 
 
 def calculate_statistics(numbers: List[float]) -> Dict[str, float]:
@@ -250,8 +253,16 @@ def calculate_statistics(numbers: List[float]) -> Dict[str, float]:
 
     힌트: sum(), min(), max(), len() 함수를 사용하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    if not numbers:
+        return {'sum': 0.0, 'mean': 0.0, 'min': 0.0, 'max': 0.0}
+
+    total = sum(numbers)
+    return {
+        'sum': float(total),
+        'mean': float(total / len(numbers)),
+        'min': float(min(numbers)),
+        'max': float(max(numbers))
+    }
 
 
 # =============================================================================
