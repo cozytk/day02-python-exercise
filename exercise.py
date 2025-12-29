@@ -297,5 +297,23 @@ def simple_etl(
 
     힌트: 앞서 만든 함수들을 조합하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    # Extract
+    data = read_csv_as_dicts(input_csv)
+    input_count = len(data)
+
+    # Transform
+    filtered = False
+    if filter_key is not None and filter_value is not None:
+        data = filter_by_condition(data, filter_key, filter_value)
+        filtered = True
+
+    output_count = len(data)
+
+    # Load
+    write_json_file(output_json, data)
+
+    return {
+        'input_count': input_count,
+        'output_count': output_count,
+        'filtered': filtered
+    }
