@@ -158,8 +158,9 @@ def csv_to_json(csv_path: str, json_path: str) -> int:
 
     힌트: 앞서 만든 read_csv_as_dicts()와 write_json_file()을 활용하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    data = read_csv_as_dicts(csv_path)
+    write_json_file(json_path, data)
+    return len(data)
 
 
 def json_to_csv(json_path: str, csv_path: str) -> int:
@@ -176,8 +177,11 @@ def json_to_csv(json_path: str, csv_path: str) -> int:
 
     힌트: 앞서 만든 read_json_file()과 write_dicts_to_csv()를 활용하세요
     """
-    # TODO: 여기에 코드를 작성하세요
-    pass
+    data = read_json_file(json_path)
+    if not data:
+        return 0
+    fieldnames = list(data[0].keys())
+    return write_dicts_to_csv(csv_path, data, fieldnames)
 
 
 # =============================================================================
